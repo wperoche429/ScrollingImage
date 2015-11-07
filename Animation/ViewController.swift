@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var index = 0
     var initialgroupAnimation : CAAnimationGroup?
     var groupAnimation : CAAnimationGroup?
-    var scrolling : CAKeyframeAnimation?
+    var scrolling : CAAnimationGroup?
     
     @IBOutlet weak var image2Width: NSLayoutConstraint!
     
@@ -40,7 +40,10 @@ class ViewController: UIViewController {
         animationGroup1()
         animationGroup2()
         scrollingAnimation()
+
         imageview1.image = UIImage(named: imageArray[index])
+        image1Width.constant = imageWidth(UIImage(named: imageArray[index])!)
+        self.view.layoutIfNeeded()
         imageview1.layer.addAnimation(self.initialgroupAnimation!, forKey: "fadinganimation")
     }
 
@@ -56,7 +59,7 @@ class ViewController: UIViewController {
         keyFrameAnimation.keyTimes = frameTimes
         
         let fadingAnimation = CAKeyframeAnimation(keyPath: "opacity")
-        let frameValues2 = [1.0, 1.0, 1.0]
+        let frameValues2 = [1.0, 1.0, 0.75]
         frameTimes = [0.0, 0.9, 1.0]
         fadingAnimation.values = frameValues2
         fadingAnimation.keyTimes = frameTimes
@@ -85,8 +88,8 @@ class ViewController: UIViewController {
         keyFrameAnimation.keyTimes = frameTimes
         
         let fadingAnimation = CAKeyframeAnimation(keyPath: "opacity")
-        let frameValues2 = [1.0, 1.0, 1.0]
-        frameTimes = [0.0, 0.9, 1.0]
+        let frameValues2 = [0.5, 1.0, 1.0, 0.75]
+        frameTimes = [0.0, 0.3, 0.9, 1.0]
         fadingAnimation.values = frameValues2
         fadingAnimation.keyTimes = frameTimes
         
@@ -110,20 +113,33 @@ class ViewController: UIViewController {
         let rect2 = CGPointMake(-(imageview1.frame.width/2), imageview1.frame.height/2)
         let frameValues = [NSValue(CGPoint: rect1), NSValue(CGPoint: rect2)]
 
-        let frameTimes = [0, 1]
+        var frameTimes = [0.0, 1.0]
         keyFrameAnimation.values = frameValues
         keyFrameAnimation.keyTimes = frameTimes
-        keyFrameAnimation.fillMode = kCAFillModeForwards;
-        keyFrameAnimation.removedOnCompletion = false;
-        keyFrameAnimation.repeatCount = 0;
-        keyFrameAnimation.duration = 3;
-        keyFrameAnimation.delegate = self;
-        scrolling = keyFrameAnimation
+        
+        let fadingAnimation = CAKeyframeAnimation(keyPath: "opacity")
+        let frameValues2 = [0.75, 0.5]
+        frameTimes = [0.0, 1.0]
+        fadingAnimation.values = frameValues2
+        fadingAnimation.keyTimes = frameTimes
+        
+        let scrollGroupAnimation = CAAnimationGroup()
+        scrollGroupAnimation.fillMode = kCAFillModeForwards;
+        scrollGroupAnimation.removedOnCompletion = false;
+        scrollGroupAnimation.repeatCount = 0;
+        scrollGroupAnimation.duration = 3;
+        scrollGroupAnimation.delegate = self;
+        scrollGroupAnimation.animations = [keyFrameAnimation, fadingAnimation]
+        
+        scrollGroupAnimation.delegate = self
+        scrolling = scrollGroupAnimation
     }
     
     override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         if (flag) {
-            if (anim.isKindOfClass(CAAnimationGroup)) {
+            if (anim == imageview1.layer.animationForKey("fadinganimation"))
+            {
+                
                 imageview1.layer.removeAllAnimations()
                 index++
                 if (index >= imageArray.count) {
@@ -133,16 +149,31 @@ class ViewController: UIViewController {
                 let tempImageview = imageview2
                 imageview2 = imageview1
                 imageview1 = tempImageview
+                
+                let width = image2Width
+                image2Width = image1Width
+                image1Width = width
+                
                 self.view.bringSubviewToFront(imageview1)
+//                image2Width.constant = image1Width.constant
+                image1Width.constant = imageWidth(UIImage(named: imageArray[index])!)
+                self.view.layoutIfNeeded()
                 imageview1.image = UIImage(named: imageArray[index])
                 imageview1.layer.addAnimation(self.groupAnimation!, forKey: "fadinganimation")
                 imageview2.layer.addAnimation(self.scrolling!, forKey: "scroll")
+                
             }
             else if (anim.isKindOfClass(CAKeyframeAnimation)) {
                 self.view.sendSubviewToBack(imageview2)
                 imageview2.image = nil
             }
         }
+    }
+    
+    func imageWidth(image : UIImage) -> CGFloat {
+        var width = image.size.width * self.view.frame.height / image.size.height
+        return width
+        
     }
     
     

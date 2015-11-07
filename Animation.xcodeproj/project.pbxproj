@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22C763241BED7CE800B05FD0 /* ImageCarouselController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C763231BED7CE800B05FD0 /* ImageCarouselController.swift */; };
 		22E315171BEC8D0D00B2AF32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E315161BEC8D0D00B2AF32 /* AppDelegate.swift */; };
 		22E315191BEC8D0D00B2AF32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E315181BEC8D0D00B2AF32 /* ViewController.swift */; };
 		22E3151C1BEC8D0D00B2AF32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22E3151A1BEC8D0D00B2AF32 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22C763231BED7CE800B05FD0 /* ImageCarouselController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarouselController.swift; sourceTree = "<group>"; };
 		22E315131BEC8D0C00B2AF32 /* Animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E315161BEC8D0D00B2AF32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22E315181BEC8D0D00B2AF32 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				22E315161BEC8D0D00B2AF32 /* AppDelegate.swift */,
 				22E315181BEC8D0D00B2AF32 /* ViewController.swift */,
+				22C763231BED7CE800B05FD0 /* ImageCarouselController.swift */,
 				22E3151A1BEC8D0D00B2AF32 /* Main.storyboard */,
 				22E3151D1BEC8D0D00B2AF32 /* Assets.xcassets */,
 				22E3151F1BEC8D0D00B2AF32 /* LaunchScreen.storyboard */,
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C763241BED7CE800B05FD0 /* ImageCarouselController.swift in Sources */,
 				22E315191BEC8D0D00B2AF32 /* ViewController.swift in Sources */,
 				22E315171BEC8D0D00B2AF32 /* AppDelegate.swift in Sources */,
 			);
@@ -482,6 +486,7 @@
 				22E3153D1BEC8D0D00B2AF32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22E3153E1BEC8D0D00B2AF32 /* Build configuration list for PBXNativeTarget "AnimationTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +495,7 @@
 				22E315401BEC8D0D00B2AF32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22E315411BEC8D0D00B2AF32 /* Build configuration list for PBXNativeTarget "AnimationUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +504,7 @@
 				22E315431BEC8D0D00B2AF32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
